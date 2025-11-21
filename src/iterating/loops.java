@@ -1,11 +1,16 @@
 package iterating;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class loops {
     public static void main(String[] args) {
+        theForLoop();
+        theForLoopInverse();
+        theNestedLoop();
+        loopingOverArrays();
         forEachLoop();
-
+        iteratingOverList();
+        iteratingAKeyPair();
     }
 
     public static void theForLoop(){
@@ -35,6 +40,7 @@ public class loops {
             System.out.print(i + " ");
         }
         //***
+        System.out.println();
     }
     public static void theForLoopInverse(){
         System.out.println("This is the method of theForLoopInverse");
@@ -52,6 +58,7 @@ public class loops {
         for(int i=99;i>=1;i-=2){
             System.out.print(i+" ");
         }
+        System.out.println();
     }
     public static void theNestedLoop(){
         System.out.println("This is the method of theNestedLoop");
@@ -83,6 +90,27 @@ public class loops {
         for(int a: array){
             System.out.print(a+" ");
         }
+        System.out.println();
+    }
+    public static void iteratingOverList(){
+        System.out.println("This is the method of iteratingOverList");
+        ArrayList<Integer> list= new ArrayList<>();
+        for(int i=0;i<10;i++){
+            list.add(i);
+        }
 
+        for(int looper: list){
+            System.out.print(looper+" ");
+        }
+    }
+    public static void iteratingAKeyPair(){
+        System.out.println("This is the method of iteratingAKeyPair");
+        Map<String,String> map= new HashMap<>();
+        for(int i=0;i<10;i++){
+            map.put("This is key"+i,""+i);
+        }
+        for(String key: map.keySet()){
+            System.out.println(key+":"+map.get(key));
+        }
     }
 }

@@ -1,4 +1,4 @@
-package iterating;
+package Iterating;
 
 import java.util.*;
 

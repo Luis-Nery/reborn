@@ -35,15 +35,11 @@ public class ContactBook {
 
     public void displayAll() {
         Set<String> set = this.contacts.keySet();
-        Iterator<String> iterator = set.iterator();
-        while(iterator.hasNext()){
-            String key = iterator.next();
+        for (String key : set) {
             System.out.print("Phone Numbers of " + key + ":");
             Set<String> phoneSet = this.contacts.get(key);
-            Iterator<String> iterator2 = phoneSet.iterator();
-            while(iterator2.hasNext()){
-                String phone = iterator2.next();
-                System.out.print(" "+phone);
+            for (String phone : phoneSet) {
+                System.out.print(" " + phone);
             }
             System.out.println();
         }

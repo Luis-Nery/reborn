@@ -1,6 +1,10 @@
 package Excercices;
 
+
 import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
 // Each contact can have MULTIPLE phone numbers
 // Use Map<String, Set<String>>
 //   Key = contact name
@@ -44,15 +48,57 @@ public class ContactBook {
             System.out.println();
         }
     }
+    public void saveToFile(String fileName){
+        try{
+            StringBuilder text =  new StringBuilder();
+            for(String name: this.contacts.keySet()){
+                text.append(name+": ");
+                Set<String> phoneSet = this.contacts.get(name);
+                text.append(String.join(", ", phoneSet));
+                text.append("\n");
+            }
+            Files.writeString(Path.of(fileName),text.toString());
+            System.out.println("Contact Book Saved to:"+fileName);
+        }catch (IOException e){
+            System.out.println("Message could not be saved"+e.getMessage());
+        }
+    }
+
+    public void loadFromFile(String fileName){
+        try{
+            String content = Files.readString(Path.of(fileName));
+            String[] lines = content.split("\n");
+            for(String line: lines){
+                if(!(line.trim().isEmpty())){
+                    String[] parts = line.split(":");
+                    String name = parts[0];
+                    String [] phonesArray = parts[1].split(",");
+                    for(String phone : phonesArray){
+                        addPhone(name, phone);
+                    }
+                }
+            }
+            System.out.println("Contact Book Loaded from:"+fileName);
+        }catch (IOException e){
+            System.out.println("File could not be loaded"+e.getMessage());
+        }
+    }
 
     // Test:
     public static void main(String[] args) {
+        System.out.println("=== Creating and saving contacts ===");
         ContactBook book = new ContactBook();
         book.addPhone("Alice", "555-1234");
         book.addPhone("Alice", "555-5678");
-        book.addPhone("Alice", "555-1234");  // Duplicate - should be ignored
         book.addPhone("Bob", "555-9999");
         book.displayAll();
+
+        book.saveToFile("contacts.txt");
+
+        System.out.println("\n=== Loading into new book ===");
+        ContactBook loadedBook = new ContactBook();
+        loadedBook.loadFromFile("contacts.txt");
+        loadedBook.displayAll();
     }
 
 }

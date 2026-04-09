@@ -1,6 +1,5 @@
 package DSA;
 
-import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> {
     public static class Node<T> {

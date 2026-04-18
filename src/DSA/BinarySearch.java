@@ -1,7 +1,5 @@
 package DSA;
 
-import java.util.ArrayList;
-
 public class BinarySearch {
 
     public int binarySearch(int[] nums, int target) {
